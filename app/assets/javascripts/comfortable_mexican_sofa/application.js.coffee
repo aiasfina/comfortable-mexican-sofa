@@ -1,6 +1,7 @@
 #= require jquery
+#= require bootstrap-sprockets
 #= require jquery_ujs
-#= require jquery.ui.all
+#= require jquery-ui
 #= require tinymce-jquery
 #= require codemirror
 #= require codemirror/modes/css
@@ -53,12 +54,13 @@ window.CMS.slugify = ->
 
 window.CMS.wysiwyg = ->
   tinymce.init
-    selector:       'textarea[data-cms-rich-text]'
-    plugins:        ['link', 'image', 'code']
-    toolbar:        'undo redo | styleselect | bullist numlist | link unlink image | code'
-    menubar:        false
-    statusbar:      false
-    relative_urls:  false
+    selector:         'textarea[data-cms-rich-text]'
+    plugins:          ['link', 'image', 'code']
+    toolbar:          'undo redo | styleselect | bullist numlist | link unlink image | code'
+    menubar:          false
+    statusbar:        false
+    relative_urls:    false
+    entity_encoding : 'raw'
 
 window.CMS.codemirror = ->
   $('textarea[data-cms-cm-mode]').each (i, element) ->
@@ -68,10 +70,15 @@ window.CMS.codemirror = ->
       autoCloseTags:  true
       lineNumbers:    true
     CMS.code_mirror_instances.push(cm)
-  
+    $(cm.display.wrapper).resizable resize: ->
+      cm.setSize($(@).width(), $(@).height())
+      cm.refresh()
+
   $('a[data-toggle="tab"]').on 'shown', ->
     for cm in CMS.code_mirror_instances
       cm.refresh()
+    return
+  return
 
 window.CMS.sortable_list = ->
   $('.sortable').sortable
@@ -98,6 +105,8 @@ window.CMS.page_blocks = ->
       url: $(this).data('url'),
       data:
         layout_id: $(this).val()
+      beforeSend: ->
+        tinymce.remove()
       complete: ->
         CMS.wysiwyg()
         CMS.timepicker()

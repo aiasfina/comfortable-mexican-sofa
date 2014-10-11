@@ -6,6 +6,7 @@ fr:
     parent_id: Parent
     content: Contenu
     identifier: Identifiant
+    full_path: Full path
   activerecord:
     models:
       comfy/cms/site: Site
@@ -79,6 +80,7 @@ fr:
             title: Modification du site
           form:
             create: Créer le site
+            cancel: Annuler
             update: Modifier le site
             is_mirrored: En miroir
       
@@ -112,6 +114,7 @@ fr:
             select_parent_layout: Sélectionner une mise en page parent
             select_app_layout: Sélectionner une mise en page de l'application
             create: Créer la mise en page
+            cancel: Annuler
             update: Modifier la mise en page
       
         pages:
@@ -142,6 +145,7 @@ fr:
             select_target_page: Pas de redirection
             preview: Prévisualiser
             create: Créer la page
+            cancel: Annuler
             update: Modifier la page
             is_published: Publié
           form_blocks:
@@ -171,6 +175,7 @@ fr:
               <<: *revision
           form:
             create: Créer le fragment
+            cancel: Annuler
             update: Modifier le fragment
       
         revisions:
@@ -211,6 +216,7 @@ fr:
           form:
             current_file: Fichier actuel
             create: Envoyer
+            cancel: Annuler
             update: Modifier le fichier
           page_form:
             are_you_sure: Êtes-vous sûr de vouloir supprimer ce fichier ?

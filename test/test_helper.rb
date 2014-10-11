@@ -19,6 +19,7 @@ class ActiveSupport::TestCase
   
   def setup
     reset_config
+    reset_locale
     stub_paperclip
   end
   
@@ -43,9 +44,15 @@ class ActiveSupport::TestCase
       config.allowed_helpers      = nil
       config.allowed_partials     = nil
       config.hostname_aliases     = nil
+      config.public_cms_path      = nil
     end
     ComfortableMexicanSofa::HttpAuth.username = 'username'
     ComfortableMexicanSofa::HttpAuth.password = 'password'
+  end
+  
+  def reset_locale
+    I18n.default_locale = :en
+    I18n.locale         = :en
   end
   
   # Example usage:
@@ -106,6 +113,7 @@ class ActionDispatch::IntegrationTest
   def setup
     host! 'test.host'
     reset_config
+    reset_locale
     stub_paperclip
   end
   
